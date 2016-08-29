@@ -21,6 +21,9 @@ else()
 endif()
 
 set(AVR_PROGRAMMER arduino)
+)
+set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -Wall -Os")
+set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -Wall -Og")
 
 project(ard)
 
