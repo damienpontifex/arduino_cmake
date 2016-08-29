@@ -6,13 +6,18 @@ set(CMAKE_TOOLCHAIN_FILE "${CMAKE_SOURCE_DIR}/utils/cmake-avr/generic-gcc-avr.cm
 
 # Get the first usb device
 execute_process(
-    COMMAND ls /dev
+    COMMAND ls
     COMMAND grep cu.usb
+    WORKING_DIRECTORY /dev
+    RESULT_VARIABLE USB_RET
     OUTPUT_VARIABLE USB_DEV
+    ERROR_VARIABLE USB_ERR
     OUTPUT_STRIP_TRAILING_WHITESPACE)
-if(${USB_DEV})
+if(USB_DEV)
     message(STATUS "Upload port at /dev/${USB_DEV} usb device")
     set(AVR_UPLOADTOOL_PORT /dev/${USB_DEV})
+else()
+    message(WARNING "Failed to find usb device: ${USB_RET} ${USB_ERR}\nEnsure usb device is currently plugged in to find the proper usb device")
 endif()
 
 set(AVR_PROGRAMMER arduino)
