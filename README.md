@@ -2,7 +2,7 @@
 
 ```bash
 brew tap osx-cross/avr
-brew install avr-gcc avr-binutils
+brew install avr-libc avrdude
 ```
 
 ### Build & Upload
